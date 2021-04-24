@@ -1,0 +1,208 @@
+<LoginScreen>:
+    GridLayout:
+        cols:1
+        GridLayout:
+            cols:1
+            padding:15,15
+            spacing:20,20
+            Label:
+                text:"User Login"
+                font_size:'20sp'
+            TextInput:
+                id:userName
+                hint_text:"User name"    
+            TextInput:
+                id:password
+                password: True
+                hint_text:"Password"
+            RelativeLayout:
+                Button:
+                    text: "Login"
+                    on_press:root.login(root.ids.userName,root.ids.password,root.ids.checkDisplay) 
+                    size_hint: 0.6, 0.5
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.6}    
+            Button:
+                size_hint:
+                text:"Login"   
+                
+            Label:
+                id:checkDisplay
+                text:""    
+        GridLayout:
+            cols:2
+            size_hint: 0.2, 0.2
+            padding: 10, 10
+            spacing: 10, 0
+            Button: 
+                id:forgotPass
+                text: "Forgot Password?"
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7, 1, 1
+                on_press:root.toForgotPassword()
+            Button: 
+                background_color: 1, 1, 1, 0
+                opacity: 1 if self.state == 'normal' else 0.5
+                color: 0.1, 0.7, 1, 1
+                text: "Sign Up"
+                id:signUp
+                text:"Sign Up"
+                on_press:root.toSignUpScreen() 
+  
+
+<SignUPScreen>:
+    GridLayout:
+        cols:1
+        GridLayout:
+            cols:1
+            Label:
+                text:"User Login"
+            TextInput:
+                id:fullName
+                hint_text:"Full Name"    
+            TextInput:
+                id:email
+                hint_text:"Email"
+            TextInput:
+                id:password
+                hint_text:"Password"    
+            TextInput:
+                id:phoneNumber
+                hint_text:"Phone Number"
+            TextInput:
+                id:gender
+                hint_text:"Gender"    
+            Button:
+                text:"SignUp"
+                on_press:root.signUp(root.ids.fullName,root.ids.email,root.ids.password,root.ids.phoneNumber,root.ids.gender)     
+        GridLayout:
+            cols:2
+            Button:
+                id:"forgotPassBtn"
+                text:"Forgot Passwword"
+            Button:
+                text:"Sign Up"  
+
+<SignUpScreenSuccess>:
+    GridLayout:
+        cols:1
+        Label:
+            text:"SignUp Successfull!"   
+        Button:
+            id:"loginForFirst"
+            text:"Login Here"
+            on_press:root.goForlogin()
+
+<ForgotPasswordScreen1>:
+    GridLayout:
+        cols:1
+        Label:
+            text:"FORGOT PASSWORD" 
+        TextInput:
+            id:userEmail
+            hint_text:"Enter email"       
+        Button:
+            id:forgotPass1
+            text:"Next"
+            on_press:root.validateEmail(root.ids.userEmail.text)
+        ScrollView:
+            Label:
+                id:warningText
+                text:""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+    
+<ForgotPasswordScreen2>:
+    GridLayout:
+        cols:1
+        Label:
+            text:"FORGOT PASSWORD" 
+        TextInput:
+            id:verificationCode
+            hint_text:"Enter Verification Code"       
+        Button:
+            id:forgotPass2
+            text:"Next"
+            on_press:root.validateCode(root.ids.verificationCode.text)
+        ScrollView:
+            Label:
+                id:warningText
+                text:""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+
+    
+<ForgotPasswordScreen3>:
+    GridLayout:
+        cols:1
+        Label:
+            text:"FORGOT PASSWORD" 
+        TextInput:
+            id:newPass
+            hint_text:"New Password"       
+        TextInput:
+            id:confirmPass
+            hint_text:"Confirm Password"       
+        Button:
+            id:forgotPass3
+            text:"RESET"
+            on_press:root.resetPass(root.ids.newPass.text,root.ids.confirmPass.text)
+        ScrollView:
+            Label:
+                id:warningText
+                text:""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+    
+           
+<LoginScreenSuccess>:
+    GridLayout:
+        cols:1
+        padding: 30, 30
+        spacing: 30, 30
+        RelativeLayout:
+            ImageButton: 
+                id:logout
+                on_press:root.logout()
+                source: 'logout_hover.png' if self.hovered else "logout_nothover.png"
+                size_hint: 0.35, 0.35
+                pos_hint: {'center_x': 0.93, 'center_y': 0.8}
+        Label:
+            text:"How do you feel?"
+        TextInput:
+            id:feeling
+            hint_text:"Things to try: happy,sad,unloved"    
+        Button:
+            id:"loginForFirst"
+            text:"HOME"
+            on_press:root.getQuote(root.ids.feeling.text)
+        
+        ScrollView:
+            Label:
+                id:wrongFeeling
+                text: ""
+                text_size: self.width, None
+                size_hint_y: None
+                height: self.texture_size[1]
+    
+<RootWidget>:
+    LoginScreen:
+        name:"login_screen"
+    SignUpScreen:
+        name:"signup_screen"
+    SignUpScreenSuccess:
+        name:"signup_success_screen"   
+    LoginScreenSuccess:
+        name:"login_success_screen" 
+    ForgotPasswordScreen1:
+        name:"forgot_password_screen1"  
+    ForgotPasswordScreen2:
+        name:"forgot_password_screen2"  
+    ForgotPasswordScreen3:
+        name:"forgot_password_screen3"  
+        
+    
